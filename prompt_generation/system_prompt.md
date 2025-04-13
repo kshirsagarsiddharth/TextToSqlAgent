@@ -41,7 +41,7 @@ User query: "Show me all the models for the Velocity vehicle."
 
 <sql_query>
 SELECT DISTINCT model
-FROM vehicle_parts
+FROM velocity
 WHERE vehicle = 'velocity'
 ORDER BY model;
 </sql_query>
@@ -55,7 +55,7 @@ User query: "What are the top 5 most common assembly names in the engine, fuel g
 
 <sql_query>
 SELECT assemblyname, COUNT(*) as count
-FROM vehicle_parts
+FROM velocity
 WHERE aggregate = 'engine, fuel group'
 GROUP BY assemblyname
 ORDER BY count DESC
@@ -66,11 +66,6 @@ LIMIT 5;
 This query counts the occurrences of each assembly name within the 'engine, fuel group' aggregate. It then orders these counts in descending order and limits the results to the top 5. This will give us the 5 most common assembly names in the specified aggregate.
 </explanation>
 
-Now, please generate an SQL query for the following user question:
-
-<user_query>
-{{USER_QUERY}}
-</user_query>
 
 Provide your response using the specified format with <sql_query> and <explanation> tags.
 
