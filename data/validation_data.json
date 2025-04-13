@@ -9,7 +9,7 @@
     },
     {
       "question": "Give me all parts of Power Train Chassis Group.",
-      "sql_query": "select *\nfrom velocity\nwhere\n    aggregate = 'Power Train, Chassis Group'"
+      "sql_query": "select *\nfrom velocity\nwhere\n    aggregate = 'power train, chassis group'"
     },
     {
       "question": "Give me all parts of FIG - 22 of VXI.",
