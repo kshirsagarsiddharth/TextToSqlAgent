@@ -11,8 +11,6 @@ from sqlalchemy import text, exc as sqlalchemy_exc, create_engine
 from anthropic import AnthropicError
 
 
-load_dotenv()
-
 logging.basicConfig(level=logging.INFO)
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -146,12 +144,13 @@ def prompt_anthropic(
     return None
 
 
-def return_engine():
+def create_db_engine():
     try:
         engine = create_engine(DATABASE_URL)
         with engine.connect() as conn:
             pass
         logging.info("Database engine created and connection tested successfully.")
+        return engine
     except sqlalchemy_exc.SQLAlchemyError as e:
         logging.error(f"Failed to create database engine or connect: {e}")
         return None
@@ -176,7 +175,7 @@ def execute_sql_query(sql_query: str, engine) -> Optional[pd.DataFrame]:
     try:
         with engine.connect() as connection:
             result = connection.execute(text(sql_query))
-            if result.return_rows:
+            if result:
                 rows = result.fetchall()
                 df = pd.DataFrame(rows)
                 logging.info(f"Query executed successfully. Fetched {len(df)} rows.")
